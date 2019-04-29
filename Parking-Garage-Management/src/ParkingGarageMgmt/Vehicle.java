@@ -13,7 +13,6 @@ public class Vehicle {
 	private String hourlyRate = null;
     private String parkingLocation;
     private String ownerName;
-    private String phone;
     private String vehicleType;
 	
 	
