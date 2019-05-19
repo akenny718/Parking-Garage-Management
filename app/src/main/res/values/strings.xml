@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Parking-Garage-Management</string>
+    <string name="user_name">User Name</string>
+    <string name="password">Password</string>
+    <string name="log_in">Log In</string>
+    <string name="create_account">Create Account</string>
+</resources>
