@@ -33,7 +33,8 @@ public class Create_Account_Activity extends MainActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create__account_);
 
-        backButton = (Button) findViewById(R.id.button_backbutton);
+        getSupportActionBar().setTitle("Create Account");
+
         finishedButton = (Button) findViewById((R.id.button_finished));
         firstNameInput = (EditText) findViewById(R.id.edit_text_firstname);
         lastNameInput = (EditText) findViewById(R.id.edit_text_lastname);
@@ -42,13 +43,6 @@ public class Create_Account_Activity extends MainActivity {
         firstNameInput.addTextChangedListener(createAccountTextWatcher);
         lastNameInput.addTextChangedListener(createAccountTextWatcher);
         passWordInput.addTextChangedListener(createAccountTextWatcher);
-
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openMainScreenFromCreateAccount();
-            }
-        });
 
         finishedButton.setOnClickListener(new View.OnClickListener() {
             @Override
