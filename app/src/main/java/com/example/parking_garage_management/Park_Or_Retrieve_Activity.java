@@ -79,7 +79,7 @@ public class Park_Or_Retrieve_Activity extends Create_Account_Activity {
                         vehicleAlreadyParked();
                     }
                     else{
-                        parkCar();//
+                        parkCar();
                     }
                 }
                 else if (radioButton == findViewById(R.id.radio_button_truck)){
