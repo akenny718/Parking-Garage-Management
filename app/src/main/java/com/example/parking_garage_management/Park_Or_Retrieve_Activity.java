@@ -156,7 +156,7 @@ public class Park_Or_Retrieve_Activity extends Create_Account_Activity {
      * has already been entered.
      */
 
-    public void vehicleAlreadyParked() {
+    private void vehicleAlreadyParked() {
         VehicleAlreadyParked vehicleAlreadyParked = new VehicleAlreadyParked();
         vehicleAlreadyParked.show(getSupportFragmentManager(), "vehicle already parked");
     }
@@ -166,7 +166,7 @@ public class Park_Or_Retrieve_Activity extends Create_Account_Activity {
      * Displays dialog box that informs user that the motorcycle lot is full
      */
 
-    public void motorcycleLotFullDialog() {
+    private void motorcycleLotFullDialog() {
         MotorcycleLotIsFull motorcycleLotIsFullL = new MotorcycleLotIsFull();
         motorcycleLotIsFullL.show(getSupportFragmentManager(), "motorcycle lot is full");
     }
@@ -176,7 +176,7 @@ public class Park_Or_Retrieve_Activity extends Create_Account_Activity {
      * Displays dialog box that informs user that the truck lot is full
      */
 
-    public void truckLotFullDialog() {
+    private void truckLotFullDialog() {
         TruckLotIsFull truckLotIsFull = new TruckLotIsFull();
         truckLotIsFull.show(getSupportFragmentManager(), "truck lot is full");
     }
@@ -186,7 +186,7 @@ public class Park_Or_Retrieve_Activity extends Create_Account_Activity {
      * Displays dialog box that informs user that the car lot is full
      */
 
-    public void carLotFullDialog() {
+    private void carLotFullDialog() {
         CarLotIsFull carLotIsFull = new CarLotIsFull();
         carLotIsFull.show(getSupportFragmentManager(), "car lot is full");
     }
@@ -197,7 +197,7 @@ public class Park_Or_Retrieve_Activity extends Create_Account_Activity {
      */
 
 
-    public void saveParkOrRetrieve(){
+    private void saveParkOrRetrieve(){
         SharedPreferences sharedPreferences = getSharedPreferences("Shared Parking", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
@@ -220,7 +220,7 @@ public class Park_Or_Retrieve_Activity extends Create_Account_Activity {
      * Restores last status of vehicle lots and number of vehicles parked
      */
 
-    public void loadParkOrRetrieve() {
+    private void loadParkOrRetrieve() {
         SharedPreferences sharedPreferences = getSharedPreferences("Shared Parking", MODE_PRIVATE);
         Gson gson = new Gson();
         String json = sharedPreferences.getString("car lot", null);
@@ -263,7 +263,7 @@ public class Park_Or_Retrieve_Activity extends Create_Account_Activity {
      * @param vehicle vehicle that has been parked
      */
 
-    public void displayTicketMsg(Vehicle vehicle) {
+    private void displayTicketMsg(Vehicle vehicle) {
         DisplayTicket ticket = new DisplayTicket();
         ticket.setMessage(vehicle.showParkingInfo());
         ticket.show(getSupportFragmentManager(), "vehicle ticket");
@@ -278,7 +278,7 @@ public class Park_Or_Retrieve_Activity extends Create_Account_Activity {
      * @param totalDue
      */
 
-    public void displayReceiptMsg(Vehicle vehicle, String totalDue) {
+    private void displayReceiptMsg(Vehicle vehicle, String totalDue) {
         DisplayReceipt receipt = new DisplayReceipt();
         receipt.setMessage(vehicle.showRetrievalInfo()+"\n"+"Amount Due: $"+totalDue);
         receipt.show(getSupportFragmentManager(), "vehicle receipt");
@@ -289,7 +289,7 @@ public class Park_Or_Retrieve_Activity extends Create_Account_Activity {
      * Displays dialog box that informs user that the vehicle can not be found
      */
 
-    public void vehicleNotFoundDialogBox() {
+    private void vehicleNotFoundDialogBox() {
         VehicleNotFound vehicleNotFound = new VehicleNotFound();
         vehicleNotFound.show(getSupportFragmentManager(), "vehicle not found");
     }
@@ -301,7 +301,7 @@ public class Park_Or_Retrieve_Activity extends Create_Account_Activity {
      */
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public void parkCar() {
+    private void parkCar() {
 
         Vehicle car = new Vehicle();
         String ownerFirstName = userAccountAccessed.getFirstName();
@@ -330,7 +330,7 @@ public class Park_Or_Retrieve_Activity extends Create_Account_Activity {
      */
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public void parkTruck() {
+    private void parkTruck() {
 
         Vehicle truck = new Vehicle();
         String ownerFirstName = userAccountAccessed.getFirstName();
@@ -359,7 +359,7 @@ public class Park_Or_Retrieve_Activity extends Create_Account_Activity {
      */
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public void parkMotorcycle() {
+    private void parkMotorcycle() {
 
         Vehicle motorcycle = new Vehicle();
         String ownerFirstName = userAccountAccessed.getFirstName();
@@ -389,7 +389,7 @@ public class Park_Or_Retrieve_Activity extends Create_Account_Activity {
      * list of vacated spaces via parking garage manager object method insertVacantSpace
      */
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public void retrieveCar() {
+    private void retrieveCar() {
 
         DecimalFormat df = new DecimalFormat("#0.00");
         LocalDateTime retrievalTime_Date = LocalDateTime.now();
@@ -418,7 +418,7 @@ public class Park_Or_Retrieve_Activity extends Create_Account_Activity {
      */
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public void retrieveTruck() {
+    private void retrieveTruck() {
 
         DecimalFormat df = new DecimalFormat("#0.00");
         LocalDateTime retrievalTime_Date = LocalDateTime.now();
@@ -447,7 +447,7 @@ public class Park_Or_Retrieve_Activity extends Create_Account_Activity {
      */
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public void retrieveMotorcylce() {
+    private void retrieveMotorcylce() {
 
         DecimalFormat df = new DecimalFormat("#0.00");
         LocalDateTime retrievalTime_Date = LocalDateTime.now();
@@ -467,12 +467,13 @@ public class Park_Or_Retrieve_Activity extends Create_Account_Activity {
     }
 
 
-    /**
-     * Checks if license field has been filled, enables retrieve button
-     * when license field has been filled
-     */
+    public void checkButton(View c){
+        int radioId = radioGroup.getCheckedRadioButtonId();
+        radioButton = findViewById(radioId);
+    }
 
-    public TextWatcher parkRetrieveTextWatcher = new TextWatcher() {
+
+    private TextWatcher parkRetrieveTextWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
