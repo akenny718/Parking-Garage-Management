@@ -13,3 +13,6 @@ used in the ParkingGarageManager class.
 ---
 ## JavaDoc File
 file:///C:/Users/kasin/StudioProjects/ParkingGarageManagement/index.html
+---
+## Note:
+Final project and files are located in Branch3
