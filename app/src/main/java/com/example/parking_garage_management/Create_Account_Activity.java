@@ -15,6 +15,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * Screen allows user to create a new account
+ *
+ * @author Arthur K. Edouard
+ */
+
 public class Create_Account_Activity extends MainActivity {
 
     private Button backButton;
@@ -65,6 +71,12 @@ public class Create_Account_Activity extends MainActivity {
     }
 
 
+    /**
+     * Displays user name that has been created for user
+     *
+     * @param userName emitted user name
+     */
+
     public void displayUserName(String userName) {
         LayoutInflater inflater = getLayoutInflater();
         View layout = inflater.inflate(R.layout.toast_layout, (ViewGroup) findViewById(R.id.toast_root));
@@ -80,21 +92,34 @@ public class Create_Account_Activity extends MainActivity {
         toast.show();
     }
 
+    /**
+     * Displays dialog box that informs user that the format
+     * of the password created does not meet the criteria
+     */
 
-    private void incorrectPassWordFormat() {
+    public void incorrectPassWordFormat() {
         WrongPassWordFormat wrongFormat = new WrongPassWordFormat();
         wrongFormat.show(getSupportFragmentManager(), "wrong format");
     }
 
 
-    private void openMainScreenFromCreateAccount() {
+    /**
+     * Opens the log screen
+     */
+
+    public void openMainScreenFromCreateAccount() {
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("User Account", userAccount);
         startActivity(intent);
     }
 
 
-    private TextWatcher createAccountTextWatcher = new TextWatcher() {
+    /**
+     * Checks to make sure all fields have been filled, enables log in button
+     * when all fields are filled
+     */
+
+    public TextWatcher createAccountTextWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
