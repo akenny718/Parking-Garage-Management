@@ -240,6 +240,7 @@ public class Vehicle {
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void setPaymentScheme(Vehicle vehicle) {
 
+        int i = 0;
         int parkingTime_Hour = vehicle.parkingTime_Date_Hour;
 
         if(parkingTime_Hour > 10 || parkingTime_Hour < 4 ) {
