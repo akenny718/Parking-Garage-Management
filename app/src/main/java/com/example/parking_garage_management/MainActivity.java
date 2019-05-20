@@ -18,6 +18,11 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 
+/**
+ * Log in screen of the application
+ *
+ * @author Arthur K. Edouard
+ */
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private String actualUserName;
     private String actualPassWord;
     private HashMap<String, UserAccount> userAccountBag = new HashMap<String, UserAccount>();
-    UserAccount userAccount;
+    protected UserAccount userAccount;
 
 
     @Override
@@ -89,7 +94,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void saveMainActivity() {
+    /**
+     * Saves status of user account bag
+     */
+
+    public void saveMainActivity() {
         SharedPreferences sharedPreferences = getSharedPreferences("Shared UserAcct Bag", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
@@ -99,7 +108,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void loadMainActivity() {
+    /**
+     * Restores condition of user account bag
+     */
+
+    public void loadMainActivity() {
         SharedPreferences sharedPreferences = getSharedPreferences("Shared UserAcct Bag", MODE_PRIVATE);
         Gson gson = new Gson();
         String json = sharedPreferences.getString("user accounts", null);
@@ -113,7 +126,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private TextWatcher loginTextWatcher = new TextWatcher() {
+    /**
+     * Checks if entry fields are empty and enables log in button when
+     * both fields are filled
+     */
+
+    public TextWatcher loginTextWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -133,23 +151,47 @@ public class MainActivity extends AppCompatActivity {
     };
 
 
-    private void wrongPassWordDialogBox() {
+    /**
+     * Displays dialog box that informs user that the password
+     * entered is incorrect
+     */
+
+    public void wrongPassWordDialogBox() {
         WrongPassWord wrongPassWord = new WrongPassWord();
         wrongPassWord.show(getSupportFragmentManager(), "wrong password");
     }
 
-    private void wrongUserNameDialogBox() {
+
+    /**
+     * Displays dialog box that informs user that the user name
+     * entered is incorrect
+     */
+
+    public void wrongUserNameDialogBox() {
         WrongUserName wrongUserName = new WrongUserName();
         wrongUserName.show(getSupportFragmentManager(), "wrong user name");
     }
 
-    private void openParkOrRetrieveScreen(UserAccount userAccountAccessed) {
+
+    /**
+     * Opens the park or retrieve screen after successful log in
+     *
+     * @param userAccountAccessed user account requested to be accessed
+     */
+
+    public void openParkOrRetrieveScreen(UserAccount userAccountAccessed) {
         Intent intent = new Intent(this, Park_Or_Retrieve_Activity.class);
         intent.putExtra("User Account Accessed", userAccountAccessed);
         startActivity(intent);
     }
 
-    private void openCreateAccountScreen() {
+
+    /**
+     * Opnes the create an account screen
+     *
+     */
+
+    public void openCreateAccountScreen() {
         Intent intent = new Intent(this, Create_Account_Activity.class);
         startActivity(intent);
     }

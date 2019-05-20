@@ -6,6 +6,13 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDialogFragment;
 
+/**
+ * Class displays a dialog box that informs user that the password
+ * entered is incorrect
+ *
+ * @author Arthur K. Edouard
+ */
+
 public class WrongPassWord extends AppCompatDialogFragment {
 
     @Override

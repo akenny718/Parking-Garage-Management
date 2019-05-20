@@ -6,6 +6,14 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDialogFragment;
 
+/**
+ * Class displays a dialog box that is used to
+ * inform user the wrong license number has been entered
+ * in an retrieval attempt
+ *
+ * @author Arthur K. Edouard
+ */
+
 public class VehicleNotFound extends AppCompatDialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {

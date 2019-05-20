@@ -6,6 +6,14 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDialogFragment;
 
+/**
+ * Class displays a dialog box that is used to
+ * inform user when the user name that is entered during log in
+ * is incorrect
+ *
+ * @author Arthur K. Edouard
+ */
+
 public class WrongUserName extends AppCompatDialogFragment {
 
     @Override

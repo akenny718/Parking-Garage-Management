@@ -6,6 +6,13 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDialogFragment;
 
+/**
+ * MotorcycleLotIsFull is a class that displays a dialog box that is used to
+ * inform user when the motorcycle lot is full upon a park attempt.
+ *
+ * @author Arthur K. Edouard
+ */
+
 public class MotorcycleLotIsFull extends AppCompatDialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {

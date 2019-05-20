@@ -6,6 +6,13 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDialogFragment;
 
+/**
+ * Class displays a dialog box that is used to
+ * inform user when the password created does not meet criteria
+ *
+ * @author Arthur K. Edouard
+ */
+
 public class WrongPassWordFormat extends AppCompatDialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {

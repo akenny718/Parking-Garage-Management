@@ -4,6 +4,12 @@ import android.os.Parcelable;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ * UserAccount facilitates the process of creating a new user account
+ *
+ * @author Arthur K. Edouard
+ */
+
 public class UserAccount implements Parcelable {
 
     private String firstName;
@@ -13,6 +19,13 @@ public class UserAccount implements Parcelable {
     private static int ID = 10000000;
     private String iD;
 
+    /**
+     * Constructs and initializes a user account
+     *
+     * @param firstName first name of new user
+     * @param lastName last name of new user
+     * @param passWord password of new user
+     */
 
     public UserAccount(String firstName, String lastName, String passWord){
         this.firstName = firstName;
@@ -28,6 +41,10 @@ public class UserAccount implements Parcelable {
         }
     }
 
+
+    /**
+     * Constructs and initializes a user account
+     */
 
     public UserAccount() {
 
@@ -53,6 +70,14 @@ public class UserAccount implements Parcelable {
             return new UserAccount[size];
         }
     };
+
+
+    /**
+     * Checks to see if password that is entered meets password criteria
+     *
+     * @param passWord password entered by user
+     * @return true if correct format
+     */
 
     public boolean checkPassWord(String passWord) {
 
@@ -97,6 +122,16 @@ public class UserAccount implements Parcelable {
         }
     }
 
+
+    /**
+     *
+     * Emits a user name for the user based on the first name, last name, and ID
+     *
+     * @param firstName first name of user
+     * @param lastName last name of user
+     * @param iD ID for user
+     * @return returns a user name
+     */
 
     public String emitUserName(String firstName, String lastName, String iD){
 
@@ -147,6 +182,12 @@ public class UserAccount implements Parcelable {
     }
 
 
+    /**
+     *
+     * Returns a clone of object
+     *
+     * @return
+     */
 
     public UserAccount clone() {
         UserAccount clone = new UserAccount(firstName, lastName, password);
@@ -154,43 +195,87 @@ public class UserAccount implements Parcelable {
     }
 
 
+    /**
+     * Returns the first name of user
+     *
+     * @return
+     */
 
     public String getFirstName() {
         return firstName;
     }
 
 
+    /**
+     * Sets the first name of user
+     *
+     * @param firstName first name of user
+     */
+
     public void setFirstName(String firstName){
         this.firstName = firstName;
     }
 
 
+    /**
+     * Returns last name
+     *
+     * @return
+     */
+
     public String getLastName() {
         return lastName;
     }
+
+
+    /**
+     * Sets last name of user
+     *
+     * @param lastName last name of user
+     */
 
     public void setLastName(String lastName){
         this.lastName = lastName;
     }
 
 
+    /**
+     * Returns user name
+     *
+     * @return
+     */
+
     public String getUserName() {
         return userName;
     }
+
+
+    /**
+     * Sets user name
+     * @param userName user name of user
+     */
 
     public void setUserName(String userName){
         this.userName = userName;
     }
 
 
+    /**
+     * Returns password of user
+     *
+     * @return
+     */
+
     public String getPassword() {
         return password;
     }
+
 
     @Override
     public int describeContents() {
         return 0;
     }
+
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {

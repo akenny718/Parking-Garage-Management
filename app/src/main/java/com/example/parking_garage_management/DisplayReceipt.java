@@ -6,6 +6,14 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDialogFragment;
 
+
+/**
+ * DisplayReceipt displays a dialog box with the retrieved vehicle's info
+ * along with the total amount due
+ *
+ * @author Arthur K. Edouard
+ */
+
 public class DisplayReceipt extends AppCompatDialogFragment {
 
     private String message;
@@ -24,6 +32,12 @@ public class DisplayReceipt extends AppCompatDialogFragment {
 
         return builder.create();
     }
+
+    /**
+     * Takes in vehicle's information and sets it to message
+     * to be displayed in dialog box
+     * @param msg
+     */
 
     public void setMessage(String msg){
         message = msg;
