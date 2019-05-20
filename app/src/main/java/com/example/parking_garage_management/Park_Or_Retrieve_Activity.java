@@ -30,6 +30,13 @@ import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 
+/**
+ * Allows user to park or retrieve vehicle by selecting
+ * the vehicle type and entering license plate number
+ *
+ * @author Arthur K. Edouard
+ */
+
 public class Park_Or_Retrieve_Activity extends Create_Account_Activity {
 
     private RadioGroup radioGroup;
@@ -42,7 +49,6 @@ public class Park_Or_Retrieve_Activity extends Create_Account_Activity {
     private int numOfCars = 0;
     private int numOfTrucks = 0;
     private int numOfMotorcycles = 0;
-    private int okPressed = 0;
     private UserAccount userAccountAccessed;
     private ParkingGarageManager pgm = new ParkingGarageManager();
     HashMap<String, Vehicle> carLot = new HashMap<String, Vehicle>();
@@ -53,6 +59,9 @@ public class Park_Or_Retrieve_Activity extends Create_Account_Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_park__or__retrieve_);
+
+        getSupportActionBar().setTitle("Park Or Retrieve");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         loadParkOrRetrieve();
         radioGroup = findViewById(R.id.radio_group);
@@ -103,9 +112,6 @@ public class Park_Or_Retrieve_Activity extends Create_Account_Activity {
                 }
 
                 saveParkOrRetrieve();
-                if(okPressed == 1) {
-                    openMainScreenFromParkOrRetrieve();
-                }
             }
         });
 
@@ -139,12 +145,16 @@ public class Park_Or_Retrieve_Activity extends Create_Account_Activity {
                 }
 
                 saveParkOrRetrieve();
-                //openMainScreenFromParkOrRetrieve();
-
             }
         });
-
     }
+
+
+    /**
+     * Displays dialog box that informs user that the vehicle
+     * has already been parked after entering a licence number that
+     * has already been entered.
+     */
 
     private void vehicleAlreadyParked() {
         VehicleAlreadyParked vehicleAlreadyParked = new VehicleAlreadyParked();
@@ -152,20 +162,39 @@ public class Park_Or_Retrieve_Activity extends Create_Account_Activity {
     }
 
 
+    /**
+     * Displays dialog box that informs user that the motorcycle lot is full
+     */
+
     private void motorcycleLotFullDialog() {
         MotorcycleLotIsFull motorcycleLotIsFullL = new MotorcycleLotIsFull();
         motorcycleLotIsFullL.show(getSupportFragmentManager(), "motorcycle lot is full");
     }
+
+
+    /**
+     * Displays dialog box that informs user that the truck lot is full
+     */
 
     private void truckLotFullDialog() {
         TruckLotIsFull truckLotIsFull = new TruckLotIsFull();
         truckLotIsFull.show(getSupportFragmentManager(), "truck lot is full");
     }
 
+
+    /**
+     * Displays dialog box that informs user that the car lot is full
+     */
+
     private void carLotFullDialog() {
         CarLotIsFull carLotIsFull = new CarLotIsFull();
         carLotIsFull.show(getSupportFragmentManager(), "car lot is full");
     }
+
+
+    /**
+     * Saves status of all lots and number of vehicles parked
+     */
 
 
     private void saveParkOrRetrieve(){
@@ -186,6 +215,10 @@ public class Park_Or_Retrieve_Activity extends Create_Account_Activity {
         editor.apply();
     }
 
+
+    /**
+     * Restores last status of vehicle lots and number of vehicles parked
+     */
 
     private void loadParkOrRetrieve() {
         SharedPreferences sharedPreferences = getSharedPreferences("Shared Parking", MODE_PRIVATE);
@@ -223,11 +256,12 @@ public class Park_Or_Retrieve_Activity extends Create_Account_Activity {
     }
 
 
-    private void openMainScreenFromParkOrRetrieve(){
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-    }
-
+    /**
+     * Displays dialog box that shows the user parking information
+     * after user clicks park button
+     *
+     * @param vehicle vehicle that has been parked
+     */
 
     private void displayTicketMsg(Vehicle vehicle) {
         DisplayTicket ticket = new DisplayTicket();
@@ -236,6 +270,14 @@ public class Park_Or_Retrieve_Activity extends Create_Account_Activity {
     }
 
 
+    /**
+     * Displays dialog bos that shows the receipt information
+     * after user clicks retrieve button
+     *
+     * @param vehicle
+     * @param totalDue
+     */
+
     private void displayReceiptMsg(Vehicle vehicle, String totalDue) {
         DisplayReceipt receipt = new DisplayReceipt();
         receipt.setMessage(vehicle.showRetrievalInfo()+"\n"+"Amount Due: $"+totalDue);
@@ -243,11 +285,20 @@ public class Park_Or_Retrieve_Activity extends Create_Account_Activity {
     }
 
 
+    /**
+     * Displays dialog box that informs user that the vehicle can not be found
+     */
+
     private void vehicleNotFoundDialogBox() {
         VehicleNotFound vehicleNotFound = new VehicleNotFound();
         vehicleNotFound.show(getSupportFragmentManager(), "vehicle not found");
     }
 
+    /**
+     * Creates vehicle object referenced as a car. Assigns car with the
+     * name of the owner, license number etc., stores the object
+     * in car lot and calls display ticket method to show information
+     */
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void parkCar() {
@@ -272,6 +323,12 @@ public class Park_Or_Retrieve_Activity extends Create_Account_Activity {
     }
 
 
+    /**
+     * Creates vehicle object referenced as a truck. Assigns truck with the
+     * name of the owner, license number etc., stores the object
+     * in truck lot and calls display ticket method to show information
+     */
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void parkTruck() {
 
@@ -294,6 +351,12 @@ public class Park_Or_Retrieve_Activity extends Create_Account_Activity {
         displayTicketMsg(truck);
     }
 
+
+    /**
+     * Creates vehicle object referenced as a motorcycle. Assigns motorcycle with the
+     * name of the owner, license number etc., stores the object
+     * in motorcycle lot and calls display ticket method to show information
+     */
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void parkMotorcycle() {
@@ -318,6 +381,13 @@ public class Park_Or_Retrieve_Activity extends Create_Account_Activity {
     }
 
 
+    /**
+     * Removes vehicle object referenced as car from car lot.
+     *
+     * Vehicle is first found using get method. The retrieval date and time is then
+     * set for the vehicle and the space that has been vacated is inserted into
+     * list of vacated spaces via parking garage manager object method insertVacantSpace
+     */
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void retrieveCar() {
 
@@ -338,6 +408,14 @@ public class Park_Or_Retrieve_Activity extends Create_Account_Activity {
         numOfCars--;
     }
 
+
+    /**
+     * Removes vehicle object referenced as truck from truck lot.
+     *
+     * Vehicle is first found using get method. The retrieval date and time is then
+     * set for the vehicle and the space that has been vacated is inserted into
+     * list of vacated spaces via parking garage manager object method insertVacantSpace
+     */
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void retrieveTruck() {
@@ -360,6 +438,14 @@ public class Park_Or_Retrieve_Activity extends Create_Account_Activity {
     }
 
 
+    /**
+     * Removes vehicle object referenced as motorcycle from motorcycle lot.
+     *
+     * Vehicle is first found using get method. The retrieval date and time is then
+     * set for the vehicle and the space that has been vacated is inserted into
+     * list of vacated spaces via parking garage manager object method insertVacantSpace
+     */
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void retrieveMotorcylce() {
 
@@ -381,11 +467,10 @@ public class Park_Or_Retrieve_Activity extends Create_Account_Activity {
     }
 
 
-    public void checkButton(View c){
-        int radioId = radioGroup.getCheckedRadioButtonId();
-        radioButton = findViewById(radioId);
-    }
-
+    /**
+     * Checks if license field has been filled, enables retrieve button
+     * when license field has been filled
+     */
 
     private TextWatcher parkRetrieveTextWatcher = new TextWatcher() {
         @Override
